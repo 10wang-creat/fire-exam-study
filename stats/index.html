@@ -1,0 +1,119 @@
+---
+layout: default
+title: 考題分析
+permalink: /stats/
+---
+<div class="wrapper">
+  <div style="padding:32px 0 16px;text-align:center">
+    <h1 style="font-size:1.6em;font-weight:800">📊 15年歷屆考題分析</h1>
+    <p style="color:#64748b;font-size:.9em">100-114年 · 60份考題 · 2,402題選擇 + 96題申論</p>
+  </div>
+
+  <!-- 各科題數 -->
+  <div class="card">
+    <div class="card-title">📋 各科題目數量</div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      {% assign subjects = "火災學概要|消防法規概要|警報與避難系統|水與化學系統" | split: "|" %}
+      {% assign mc_counts = "601|599|600|602" | split: "|" %}
+      {% assign essay_counts = "24|24|24|24" | split: "|" %}
+      {% assign colors = "#ef4444|#3b82f6|#f59e0b|#22c55e" | split: "|" %}
+      {% assign icons = "🔥|📜|🚨|💧" | split: "|" %}
+      {% for i in (0..3) %}
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="width:24px;text-align:center">{{ icons[i] }}</div>
+        <div style="width:100px;font-size:.85em;font-weight:600;color:#94a3b8;flex-shrink:0">{{ subjects[i] | replace:'概要','' }}</div>
+        <div style="flex:1;background:#0f172a;border-radius:4px;height:28px;position:relative;overflow:hidden">
+          <div style="width:{{ mc_counts[i] | times:100 | divided_by:602 }}%;height:100%;background:{{ colors[i] }};border-radius:4px;opacity:.7"></div>
+          <span style="position:absolute;right:8px;top:4px;font-size:.8em;font-weight:600">{{ mc_counts[i] }} 選擇 + {{ essay_counts[i] }} 申論</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- 考試結構變化 -->
+  <div class="card">
+    <div class="card-title">📅 考試結構變化</div>
+    <div style="font-size:.9em;line-height:1.8;color:#94a3b8">
+      <div style="padding:8px 0;border-bottom:1px solid #334155">
+        <span style="color:#f59e0b;font-weight:700">100-102年：</span>純選擇題 50 題（每題 2 分）
+      </div>
+      <div style="padding:8px 0">
+        <span style="color:#22c55e;font-weight:700">103年至今：</span>申論 50 分（2題×25分）+ 選擇 50 分（40題×1.25分）
+      </div>
+    </div>
+  </div>
+
+  <!-- 火災學 TOP 考點 -->
+  <div class="card">
+    <div class="card-title">🔥 火災學 — 高頻考點 TOP 10</div>
+    {% assign fire_topics = "閃燃 Flashover|CO/煙毒|電氣火災|輻射/Stefan-Boltzmann|燃燒上下限|閃火點/發火點|理論空氣量|公共危險物品分類|粉塵爆炸|煙囪效應" | split: "|" %}
+    {% assign fire_years = "15|15|13|12|12|12|12|11|11|10" | split: "|" %}
+    {% for i in (0..9) %}
+    <div style="display:flex;align-items:center;gap:10px;padding:6px 0;{% if i < 9 %}border-bottom:1px solid #1e293b{% endif %}">
+      <div style="width:24px;font-size:.8em;font-weight:800;color:#64748b;text-align:center">{{ i | plus:1 }}</div>
+      <div style="flex:1;font-size:.9em;font-weight:600">{{ fire_topics[i] }}</div>
+      <div style="font-size:.85em;font-weight:800;color:{% if fire_years[i] == '15' %}#ef4444{% elsif fire_years[i] == '12' or fire_years[i] == '13' %}#f59e0b{% else %}#22c55e{% endif %}">{{ fire_years[i] }}/15</div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- 消防法規 TOP 考點 -->
+  <div class="card">
+    <div class="card-title">📜 消防法規 — 高頻考點 TOP 10</div>
+    {% assign law_topics = "檢修申報|消防設備人員法|設置標準|公共危險物品辦法|消防法/施行細則|自動撒水|消防幫浦|地下建築物|審查查驗|液化石油氣" | split: "|" %}
+    {% assign law_years = "15|15|15|15|15|15|14|14|14|13" | split: "|" %}
+    {% for i in (0..9) %}
+    <div style="display:flex;align-items:center;gap:10px;padding:6px 0;{% if i < 9 %}border-bottom:1px solid #1e293b{% endif %}">
+      <div style="width:24px;font-size:.8em;font-weight:800;color:#64748b;text-align:center">{{ i | plus:1 }}</div>
+      <div style="flex:1;font-size:.9em;font-weight:600">{{ law_topics[i] }}</div>
+      <div style="font-size:.85em;font-weight:800;color:{% if law_years[i] == '15' %}#ef4444{% else %}#f59e0b{% endif %}">{{ law_years[i] }}/15</div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- 警報避難 TOP 考點 -->
+  <div class="card">
+    <div class="card-title">🚨 警報避難 — 高頻考點 TOP 10</div>
+    {% assign alarm_topics = "火警探測器|標示設備|瓦斯漏氣警報|緊急廣播設備|排煙設備|受信總機P/R型|差動式探測器|緊急照明|定溫式探測器|避難器具" | split: "|" %}
+    {% assign alarm_years = "15|15|15|15|15|15|15|15|15|14" | split: "|" %}
+    {% for i in (0..9) %}
+    <div style="display:flex;align-items:center;gap:10px;padding:6px 0;{% if i < 9 %}border-bottom:1px solid #1e293b{% endif %}">
+      <div style="width:24px;font-size:.8em;font-weight:800;color:#64748b;text-align:center">{{ i | plus:1 }}</div>
+      <div style="flex:1;font-size:.9em;font-weight:600">{{ alarm_topics[i] }}</div>
+      <div style="font-size:.85em;font-weight:800;color:{% if alarm_years[i] == '15' %}#ef4444{% else %}#f59e0b{% endif %}">{{ alarm_years[i] }}/15</div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- 水化學 TOP 考點 -->
+  <div class="card">
+    <div class="card-title">💧 水化學 — 高頻考點 TOP 10</div>
+    {% assign water_topics = "自動撒水設備|泡沫滅火設備|乾粉滅火設備|滅火器|CO₂滅火設備|室內消防栓|消防幫浦|室外消防栓|綜合檢查|密閉式撒水" | split: "|" %}
+    {% assign water_years = "15|15|15|15|15|15|15|15|14|14" | split: "|" %}
+    {% for i in (0..9) %}
+    <div style="display:flex;align-items:center;gap:10px;padding:6px 0;{% if i < 9 %}border-bottom:1px solid #1e293b{% endif %}">
+      <div style="width:24px;font-size:.8em;font-weight:800;color:#64748b;text-align:center">{{ i | plus:1 }}</div>
+      <div style="flex:1;font-size:.9em;font-weight:600">{{ water_topics[i] }}</div>
+      <div style="font-size:.85em;font-weight:800;color:{% if water_years[i] == '15' %}#ef4444{% else %}#f59e0b{% endif %}">{{ water_years[i] }}/15</div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- 申論題高頻主題 -->
+  <div class="card">
+    <div class="card-title">📝 申論題重複出題主題（103-114年）</div>
+    <div style="font-size:.85em;color:#94a3b8;margin-bottom:12px">以下主題出現2次以上，必須準備答案模板</div>
+    {% assign essay_subjs = "火災學|火災學|火災學|火災學|消防法規|消防法規|消防法規|水化學|水化學|水化學|警報避難|警報避難|警報避難" | split: "|" %}
+    {% assign essay_names = "閃燃vs複燃|粉塵爆炸防護|電氣火災原理|沸溢/濺溢區分|檢修申報制度|公危物品場所|消防設備士資格|自動撒水設備|乾粉滅火設備|室內消防栓|瓦斯漏氣警報|受信總機P/R型|排煙設備" | split: "|" %}
+    {% assign essay_times = "4次|2次|2次|3次|3次|4次|2次|6次+|4次|3次|4次|2次|3次" | split: "|" %}
+    {% assign essay_colors = "#ef4444|#ef4444|#ef4444|#ef4444|#3b82f6|#3b82f6|#3b82f6|#22c55e|#22c55e|#22c55e|#f59e0b|#f59e0b|#f59e0b" | split: "|" %}
+    {% for i in (0..12) %}
+    <div style="display:flex;align-items:center;gap:8px;padding:6px 0;{% if i < 12 %}border-bottom:1px solid #1e293b{% endif %}">
+      <span class="badge" style="background:rgba(255,255,255,.05);color:{{ essay_colors[i] }};font-size:.7em;min-width:50px;text-align:center">{{ essay_subjs[i] }}</span>
+      <div style="flex:1;font-size:.9em;font-weight:600">{{ essay_names[i] }}</div>
+      <div style="font-size:.8em;font-weight:700;color:#f59e0b">{{ essay_times[i] }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
