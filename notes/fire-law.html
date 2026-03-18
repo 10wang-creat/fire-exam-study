@@ -1,0 +1,41 @@
+---
+layout: default
+title: 消防法規概要 — 圖解筆記
+---
+<div class="wrapper">
+  <div class="note-list-header">
+    <h1>📜 消防法規概要</h1>
+    <p>15年歷屆考題分析 · 599題選擇 + 24題申論 · 依出題頻率排序</p>
+  </div>
+
+  {% assign law_notes = site.notes | where: "subject", "消防法規概要" | sort: "order" %}
+  {% for note in law_notes %}
+  <div class="note-item" style="border-left-color:{% if note.priority == 'P1' %}#ef4444{% elsif note.priority == 'P2' %}#f59e0b{% else %}#22c55e{% endif %}">
+    <a href="{{ note.url | relative_url }}">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div class="note-item-left">
+          <div style="display:flex;gap:6px;margin-bottom:4px">
+            <span class="badge badge-{{ note.priority | downcase }}">{{ note.priority }} {{ note.priority_label }}</span>
+          </div>
+          <div class="note-item-title">{{ note.title }}</div>
+          <div class="note-item-summary">{{ note.summary }}</div>
+        </div>
+        <div class="note-item-right">
+          <div class="note-item-years" style="color:{% if note.priority == 'P1' %}#ef4444{% elsif note.priority == 'P2' %}#f59e0b{% else %}#22c55e{% endif %}">{{ note.years }}</div>
+          <div class="note-item-sub">/15年</div>
+        </div>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+
+  {% if law_notes.size == 0 %}
+  <div class="card" style="text-align:center;padding:40px;color:#64748b">
+    <p>筆記建置中，敬請期待 🚧</p>
+  </div>
+  {% endif %}
+
+  <div style="text-align:center;margin-top:20px">
+    <a href="{{ site.baseurl }}/practice/?subject=消防法規概要" class="btn btn-primary">✏️ 練習消防法規考題</a>
+  </div>
+</div>

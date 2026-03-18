@@ -1,0 +1,36 @@
+---
+layout: default
+title: 火災學概要 — 圖解筆記
+---
+<div class="wrapper">
+  <div class="note-list-header">
+    <h1>🔥 火災學概要</h1>
+    <p>15年歷屆考題分析 · 601題選擇 + 24題申論 · 依出題頻率排序</p>
+  </div>
+
+  {% assign fire_notes = site.notes | where: "subject", "火災學概要" | sort: "order" %}
+  {% for note in fire_notes %}
+  <div class="note-item" style="border-left-color:{% if note.priority == 'P1' %}#ef4444{% elsif note.priority == 'P2' %}#f59e0b{% else %}#22c55e{% endif %}">
+    <a href="{{ note.url | relative_url }}">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div class="note-item-left">
+          <div style="display:flex;gap:6px;margin-bottom:4px">
+            <span class="badge badge-{{ note.priority | downcase }}">{{ note.priority }} {{ note.priority_label }}</span>
+            <span style="font-size:.75em;color:#64748b">{{ note.qtype }}</span>
+          </div>
+          <div class="note-item-title">{{ note.title }}</div>
+          <div class="note-item-summary">{{ note.summary }}</div>
+        </div>
+        <div class="note-item-right">
+          <div class="note-item-years" style="color:{% if note.priority == 'P1' %}#ef4444{% elsif note.priority == 'P2' %}#f59e0b{% else %}#22c55e{% endif %}">{{ note.years }}</div>
+          <div class="note-item-sub">/15年</div>
+        </div>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+
+  <div style="text-align:center;margin-top:20px">
+    <a href="{{ site.baseurl }}/practice/?subject=火災學概要" class="btn btn-primary">✏️ 練習火災學考題</a>
+  </div>
+</div>

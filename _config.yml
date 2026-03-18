@@ -1,0 +1,30 @@
+title: 消防設備士備考系統
+description: >-
+  歷屆考題分析 → 圖解筆記 → 練題 → 錯題回連
+baseurl: ""
+url: "https://fire-exam-study.vercel.app"
+
+# Build settings
+theme: null
+plugins: []
+
+# Collections
+collections:
+  notes:
+    output: true
+    permalink: /notes/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "notes"
+    values:
+      layout: "note"
+
+# 排除不需要編譯的檔案
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - README.md

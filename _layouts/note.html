@@ -1,0 +1,28 @@
+---
+layout: default
+---
+<article class="note-page">
+  <header class="note-header">
+    <div class="note-meta">
+      <span class="badge badge-{{ page.priority | downcase }}">{{ page.priority }} {{ page.priority_label }}</span>
+      <span class="badge badge-subj">{{ page.subject }}</span>
+      <span class="note-years">{{ page.years }}/15年出現</span>
+    </div>
+    <h1>{{ page.title }}</h1>
+    <p class="note-summary">{{ page.summary }}</p>
+  </header>
+  <div class="note-content">
+    {{ content }}
+  </div>
+  {% if page.tags %}
+  <div class="note-tags">
+    {% for tag in page.tags %}
+    <span class="tag">#{{ tag }}</span>
+    {% endfor %}
+  </div>
+  {% endif %}
+  <div class="note-actions">
+    <a href="{{ site.baseurl }}/practice/?topic={{ page.slug }}" class="btn btn-primary">📝 練習相關考題</a>
+    <a href="{{ site.baseurl }}/notes/{{ page.subject_slug }}/" class="btn btn-outline">← 返回{{ page.subject }}</a>
+  </div>
+</article>

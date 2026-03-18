@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ site.description }}">
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrapper">
+      <a href="{{ site.baseurl }}/" class="site-title">🔥 消防設備士備考系統</a>
+      <nav class="site-nav">
+        <a href="{{ site.baseurl }}/">首頁</a>
+        <a href="{{ site.baseurl }}/notes/fire-science/">火災學</a>
+        <a href="{{ site.baseurl }}/notes/fire-law/">消防法規</a>
+        <a href="{{ site.baseurl }}/notes/alarm-system/">警報避難</a>
+        <a href="{{ site.baseurl }}/notes/water-chemical/">水化學</a>
+        <a href="{{ site.baseurl }}/practice/">練題</a>
+        <a href="{{ site.baseurl }}/wrong/">錯題本</a>
+      </nav>
+    </div>
+  </header>
+  <main class="page-content">
+    {{ content }}
+  </main>
+  <footer class="site-footer">
+    <div class="wrapper">
+      <p>消防設備士備考系統 · 100-114年歷屆考題 · 2,402題 · 4科</p>
+    </div>
+  </footer>
+  {% if page.load_js %}
+  {% for js in page.load_js %}
+  <script src="{{ site.baseurl }}/assets/js/{{ js }}"></script>
+  {% endfor %}
+  {% endif %}
+</body>
+</html>
