@@ -4,10 +4,10 @@
    ============================================================ */
 
 const SUBJECTS = [
-  { slug: 'fire-science', name: '火災學概要', color: '#ef4444' },
-  { slug: 'fire-law', name: '消防法規概要', color: '#3b82f6' },
-  { slug: 'alarm-system', name: '警報與避難系統', color: '#f59e0b' },
-  { slug: 'water-chemical', name: '水與化學系統', color: '#22c55e' },
+  { slug: 'fire-science', name: '火災學概要', color: '#C9708E' },
+  { slug: 'fire-law', name: '消防法規概要', color: '#6D93C8' },
+  { slug: 'alarm-system', name: '警報與避難系統', color: '#8981C2' },
+  { slug: 'water-chemical', name: '水與化學系統', color: '#6E8F7D' },
 ];
 
 let allQuestions = [];
@@ -74,14 +74,14 @@ function renderSelect() {
     <div class="card">
       <div class="card-title">📋 選擇練習範圍（共 ${loadedCount} 題）</div>
       <div style="margin-bottom:12px">
-        <div style="font-size:.8em;color:#64748b;margin-bottom:6px">科目：</div>
+        <div style="font-size:.8em;color:#8B8FA3;margin-bottom:6px">科目：</div>
         <div class="filter-row" id="subj-filters">
           <button class="filter-btn ${currentSubject === '全部' ? 'active' : ''}" onclick="setSubject('全部')">全部</button>
           ${SUBJECTS.map(s => `<button class="filter-btn ${currentSubject === s.name ? 'active' : ''}" onclick="setSubject('${s.name}')">${s.name.replace('概要','')}</button>`).join('')}
         </div>
       </div>
       <div style="margin-bottom:16px">
-        <div style="font-size:.8em;color:#64748b;margin-bottom:6px">年份：</div>
+        <div style="font-size:.8em;color:#8B8FA3;margin-bottom:6px">年份：</div>
         <div class="filter-row" id="year-filters">
           <button class="filter-btn ${currentYear === '全部' ? 'active' : ''}" onclick="setYear('全部')">全部</button>
           <button class="filter-btn ${currentYear === 'recent' ? 'active' : ''}" onclick="setYear('recent')">近5年</button>
@@ -150,7 +150,7 @@ function renderDoing() {
     const isCorrect = userAns === q.a;
     resultHtml = `
       <div class="result-box ${isCorrect ? 'result-correct' : 'result-wrong'}">
-        <div style="font-weight:700;color:${isCorrect ? '#22c55e' : '#ef4444'}">
+        <div style="font-weight:700;color:${isCorrect ? '#6E8F7D' : '#C9708E'}">
           ${isCorrect ? '✅ 答對了！' : `❌ 答錯了！正確答案是 ${q.a || '未知'}`}
         </div>
         ${!isCorrect ? `<button class="btn btn-outline" style="margin-top:8px;font-size:.8em" onclick="addToWrong()">📌 加入錯題本</button>` : ''}
@@ -163,13 +163,13 @@ function renderDoing() {
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
         <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
           <span class="badge badge-subj">${q.subj.replace('概要','')}</span>
-          <span class="badge" style="background:rgba(139,92,246,.15);color:#a78bfa">${q.y}年</span>
-          <span style="font-size:.8em;color:#64748b">第${q.n}題</span>
+          <span class="badge" style="background:rgba(187,173,216,.15);color:#8981C2">${q.y}年</span>
+          <span style="font-size:.8em;color:#8B8FA3">第${q.n}題</span>
         </div>
-        <div style="font-size:.9em;font-weight:700;color:#94a3b8">${currentIndex + 1} / ${filteredQuestions.length}</div>
+        <div style="font-size:.9em;font-weight:700;color:#5C6B85">${currentIndex + 1} / ${filteredQuestions.length}</div>
       </div>
       <div class="progress-bar" style="margin-bottom:14px">
-        <div class="progress-fill" style="width:${progress}%;background:#3b82f6"></div>
+        <div class="progress-fill" style="width:${progress}%;background:#6D93C8"></div>
       </div>
       <div style="font-size:.95em;line-height:1.7;margin-bottom:12px">${q.t}</div>
     </div>
@@ -238,10 +238,10 @@ function showResult() {
 
   el.innerHTML = `
     <div class="card" style="text-align:center;padding:40px">
-      <div style="font-size:3em;font-weight:900;color:${rate >= 60 ? '#22c55e' : '#ef4444'}">${rate}%</div>
-      <div style="font-size:1em;color:#94a3b8;margin-top:4px">答對 ${correct} / ${answered} 題</div>
+      <div style="font-size:3em;font-weight:900;color:${rate >= 60 ? '#6E8F7D' : '#C9708E'}">${rate}%</div>
+      <div style="font-size:1em;color:#5C6B85;margin-top:4px">答對 ${correct} / ${answered} 題</div>
       <div class="progress-bar" style="margin-top:16px;height:14px">
-        <div class="progress-fill" style="width:${rate}%;background:${rate >= 60 ? '#22c55e' : '#ef4444'}"></div>
+        <div class="progress-fill" style="width:${rate}%;background:${rate >= 60 ? '#6E8F7D' : '#C9708E'}"></div>
       </div>
       <div style="display:flex;gap:8px;justify-content:center;margin-top:24px;flex-wrap:wrap">
         <button class="btn btn-primary" onclick="renderSelect()">再練一次</button>

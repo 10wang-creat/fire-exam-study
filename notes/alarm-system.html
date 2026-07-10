@@ -11,7 +11,7 @@ permalink: /notes/alarm-system/
 
   {% assign alarm_notes = site.notes | where: "subject", "警報與避難系統" | sort: "order" %}
   {% for note in alarm_notes %}
-  <div class="note-item" style="border-left-color:{% if note.priority == 'P1' %}#ef4444{% elsif note.priority == 'P2' %}#f59e0b{% else %}#22c55e{% endif %}">
+  <div class="note-item" style="border-left-color:{% if note.priority == 'P1' %}#C9708E{% elsif note.priority == 'P2' %}#8981C2{% else %}#6E8F7D{% endif %}">
     <a href="{{ note.url | relative_url }}">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <div class="note-item-left">
@@ -22,7 +22,7 @@ permalink: /notes/alarm-system/
           <div class="note-item-summary">{{ note.summary }}</div>
         </div>
         <div class="note-item-right">
-          <div class="note-item-years" style="color:{% if note.priority == 'P1' %}#ef4444{% elsif note.priority == 'P2' %}#f59e0b{% else %}#22c55e{% endif %}">{{ note.years }}</div>
+          <div class="note-item-years" style="color:{% if note.priority == 'P1' %}#C9708E{% elsif note.priority == 'P2' %}#8981C2{% else %}#6E8F7D{% endif %}">{{ note.years }}</div>
           <div class="note-item-sub">/15年</div>
         </div>
       </div>
@@ -31,7 +31,7 @@ permalink: /notes/alarm-system/
   {% endfor %}
 
   {% if alarm_notes.size == 0 %}
-  <div class="card" style="text-align:center;padding:40px;color:#64748b">
+  <div class="card" style="text-align:center;padding:40px;color:#8B8FA3">
     <p>筆記建置中，敬請期待 🚧</p>
   </div>
   {% endif %}

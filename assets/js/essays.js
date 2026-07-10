@@ -4,10 +4,10 @@
    ============================================================ */
 
 const ESSAY_SUBJECTS = [
-  { key: '火災學', icon: '🔥', color: '#ef4444' },
-  { key: '消防法規', icon: '📋', color: '#3b82f6' },
-  { key: '水與化學系統', icon: '💧', color: '#22c55e' },
-  { key: '警報與避難系統', icon: '🚨', color: '#f59e0b' },
+  { key: '火災學', icon: '🔥', color: '#C9708E' },
+  { key: '消防法規', icon: '📋', color: '#6D93C8' },
+  { key: '水與化學系統', icon: '💧', color: '#6E8F7D' },
+  { key: '警報與避難系統', icon: '🚨', color: '#8981C2' },
 ];
 
 const STORAGE_KEY = 'essay-practice-v1';
@@ -25,7 +25,7 @@ async function loadEssays() {
     essays = await resp.json();
   } catch (e) {
     document.getElementById('essay-app').innerHTML =
-      '<div class="card" style="text-align:center;padding:40px;color:#ef4444">載入失敗，請確認 essay-questions.json 存在</div>';
+      '<div class="card" style="text-align:center;padding:40px;color:#C9708E">載入失敗，請確認 essay-questions.json 存在</div>';
     return;
   }
   practiceState = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
@@ -72,9 +72,9 @@ function render() {
     <div class="card" style="margin-bottom:16px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
         <span style="font-weight:700">總進度</span>
-        <span style="font-size:.85em;color:#64748b">${practicedAll} / ${totalAll} 題 (${pctAll}%)</span>
+        <span style="font-size:.85em;color:#8B8FA3">${practicedAll} / ${totalAll} 題 (${pctAll}%)</span>
       </div>
-      <div class="progress-bar"><div class="progress-fill" style="width:${pctAll}%;background:linear-gradient(90deg,#3b82f6,#22c55e)"></div></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${pctAll}%;background:linear-gradient(90deg,#6D93C8,#6E8F7D)"></div></div>
     </div>
   `;
 
@@ -90,9 +90,9 @@ function render() {
   html += `<div class="filter-row" style="margin-bottom:12px">
     <button class="filter-btn ${filterStatus === '全部' ? 'active' : ''}" onclick="setFilter('全部')">全部</button>
     <button class="filter-btn ${filterStatus === 'new' ? 'active' : ''}" onclick="setFilter('new')">⬜ 未練</button>
-    <button class="filter-btn ${filterStatus === 'weak' ? 'active' : ''}" onclick="setFilter('weak')" style="${filterStatus === 'weak' ? 'border-color:#ef4444;background:#ef4444' : ''}">🔴 不熟</button>
-    <button class="filter-btn ${filterStatus === 'ok' ? 'active' : ''}" onclick="setFilter('ok')" style="${filterStatus === 'ok' ? 'border-color:#f59e0b;background:#f59e0b' : ''}">🟡 普通</button>
-    <button class="filter-btn ${filterStatus === 'good' ? 'active' : ''}" onclick="setFilter('good')" style="${filterStatus === 'good' ? 'border-color:#22c55e;background:#22c55e' : ''}">🟢 熟練</button>
+    <button class="filter-btn ${filterStatus === 'weak' ? 'active' : ''}" onclick="setFilter('weak')" style="${filterStatus === 'weak' ? 'border-color:#C9708E;background:#C9708E' : ''}">🔴 不熟</button>
+    <button class="filter-btn ${filterStatus === 'ok' ? 'active' : ''}" onclick="setFilter('ok')" style="${filterStatus === 'ok' ? 'border-color:#8981C2;background:#8981C2' : ''}">🟡 普通</button>
+    <button class="filter-btn ${filterStatus === 'good' ? 'active' : ''}" onclick="setFilter('good')" style="${filterStatus === 'good' ? 'border-color:#6E8F7D;background:#6E8F7D' : ''}">🟢 熟練</button>
   </div>`;
 
   // Filtered list
@@ -102,37 +102,37 @@ function render() {
   }
 
   if (items.length === 0) {
-    html += '<div class="card" style="text-align:center;padding:24px;color:#64748b">此篩選條件無題目</div>';
+    html += '<div class="card" style="text-align:center;padding:24px;color:#8B8FA3">此篩選條件無題目</div>';
   }
 
   // Group by year
   const years = [...new Set(items.map(e => e.y))].sort((a, b) => b - a);
   for (const y of years) {
     const yearItems = items.filter(e => e.y === y);
-    html += `<div style="margin-top:16px;margin-bottom:6px;font-size:.8em;color:#64748b;font-weight:700">📅 ${y} 年</div>`;
+    html += `<div style="margin-top:16px;margin-bottom:6px;font-size:.8em;color:#8B8FA3;font-weight:700">📅 ${y} 年</div>`;
     for (const e of yearItems) {
       const status = getStatus(e);
       const statusIcon = status === 'good' ? '🟢' : status === 'ok' ? '🟡' : status === 'weak' ? '🔴' : '⬜';
       const date = practiceState[getKey(e)]?.date || '';
-      const borderColor = status === 'good' ? '#22c55e' : status === 'ok' ? '#f59e0b' : status === 'weak' ? '#ef4444' : '#334155';
+      const borderColor = status === 'good' ? '#6E8F7D' : status === 'ok' ? '#8981C2' : status === 'weak' ? '#C9708E' : '#E2DDEA';
 
       html += `
         <div class="card" style="border-left:4px solid ${borderColor};padding:14px 16px;margin-bottom:8px">
           <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
             <div style="flex:1;min-width:0">
-              <div style="font-size:.75em;color:#64748b;margin-bottom:4px">
+              <div style="font-size:.75em;color:#8B8FA3;margin-bottom:4px">
                 第${e.n}題 · <span class="badge badge-subj" style="font-size:.9em">${e.type}</span>
                 ${e.tags.map(t => `<span class="tag">${t}</span>`).join('')}
               </div>
               <div style="font-size:.95em;font-weight:600;line-height:1.5">${e.t}</div>
-              ${date ? `<div style="font-size:.7em;color:#475569;margin-top:4px">上次練習：${date}</div>` : ''}
+              ${date ? `<div style="font-size:.7em;color:#ADA9BE;margin-top:4px">上次練習：${date}</div>` : ''}
             </div>
             <div style="flex-shrink:0;display:flex;flex-direction:column;gap:4px;align-items:center">
               <span style="font-size:1.2em">${statusIcon}</span>
               <div style="display:flex;gap:3px;margin-top:4px">
-                <button onclick="rate('${getKey(e)}','weak')" title="不熟" style="width:24px;height:24px;border-radius:50%;border:2px solid ${status === 'weak' ? '#ef4444' : '#334155'};background:${status === 'weak' ? 'rgba(239,68,68,.2)' : 'transparent'};cursor:pointer;font-size:.7em;color:#ef4444">✗</button>
-                <button onclick="rate('${getKey(e)}','ok')" title="普通" style="width:24px;height:24px;border-radius:50%;border:2px solid ${status === 'ok' ? '#f59e0b' : '#334155'};background:${status === 'ok' ? 'rgba(249,115,22,.2)' : 'transparent'};cursor:pointer;font-size:.7em;color:#f59e0b">△</button>
-                <button onclick="rate('${getKey(e)}','good')" title="熟練" style="width:24px;height:24px;border-radius:50%;border:2px solid ${status === 'good' ? '#22c55e' : '#334155'};background:${status === 'good' ? 'rgba(34,197,94,.2)' : 'transparent'};cursor:pointer;font-size:.7em;color:#22c55e">✓</button>
+                <button onclick="rate('${getKey(e)}','weak')" title="不熟" style="width:24px;height:24px;border-radius:50%;border:2px solid ${status === 'weak' ? '#C9708E' : '#E2DDEA'};background:${status === 'weak' ? 'rgba(225,162,186,.2)' : 'transparent'};cursor:pointer;font-size:.7em;color:#C9708E">✗</button>
+                <button onclick="rate('${getKey(e)}','ok')" title="普通" style="width:24px;height:24px;border-radius:50%;border:2px solid ${status === 'ok' ? '#8981C2' : '#E2DDEA'};background:${status === 'ok' ? 'rgba(137,129,194,.2)' : 'transparent'};cursor:pointer;font-size:.7em;color:#8981C2">△</button>
+                <button onclick="rate('${getKey(e)}','good')" title="熟練" style="width:24px;height:24px;border-radius:50%;border:2px solid ${status === 'good' ? '#6E8F7D' : '#E2DDEA'};background:${status === 'good' ? 'rgba(157,182,168,.2)' : 'transparent'};cursor:pointer;font-size:.7em;color:#6E8F7D">✓</button>
               </div>
             </div>
           </div>

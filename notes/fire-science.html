@@ -11,19 +11,19 @@ permalink: /notes/fire-science/
 
   {% assign fire_notes = site.notes | where: "subject", "火災學概要" | sort: "order" %}
   {% for note in fire_notes %}
-  <div class="note-item" style="border-left-color:{% if note.priority == 'P1' %}#ef4444{% elsif note.priority == 'P2' %}#f59e0b{% else %}#22c55e{% endif %}">
+  <div class="note-item" style="border-left-color:{% if note.priority == 'P1' %}#C9708E{% elsif note.priority == 'P2' %}#8981C2{% else %}#6E8F7D{% endif %}">
     <a href="{{ note.url | relative_url }}">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <div class="note-item-left">
           <div style="display:flex;gap:6px;margin-bottom:4px">
             <span class="badge badge-{{ note.priority | downcase }}">{{ note.priority }} {{ note.priority_label }}</span>
-            <span style="font-size:.75em;color:#64748b">{{ note.qtype }}</span>
+            <span style="font-size:.75em;color:#8B8FA3">{{ note.qtype }}</span>
           </div>
           <div class="note-item-title">{{ note.title }}</div>
           <div class="note-item-summary">{{ note.summary }}</div>
         </div>
         <div class="note-item-right">
-          <div class="note-item-years" style="color:{% if note.priority == 'P1' %}#ef4444{% elsif note.priority == 'P2' %}#f59e0b{% else %}#22c55e{% endif %}">{{ note.years }}</div>
+          <div class="note-item-years" style="color:{% if note.priority == 'P1' %}#C9708E{% elsif note.priority == 'P2' %}#8981C2{% else %}#6E8F7D{% endif %}">{{ note.years }}</div>
           <div class="note-item-sub">/15年</div>
         </div>
       </div>
