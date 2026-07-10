@@ -1,8 +1,8 @@
 title: 消防設備士備考系統
 description: >-
   歷屆考題分析 → 圖解筆記 → 練題 → 錯題回連
-baseurl: ""
-url: "https://fire-exam-study.vercel.app"
+baseurl: "/fire-exam-study"
+url: "https://10wang-creat.github.io"
 
 # Build settings
 theme: null
