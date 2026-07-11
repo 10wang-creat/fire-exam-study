@@ -12,22 +12,28 @@ const ESSAY_SUBJECTS = [
 
 const STORAGE_KEY = 'essay-practice-v1';
 let essays = [];
+let answers = {};
+let openAnswers = new Set();
 let practiceState = {};
 let activeSubject = '火災學';
 let filterType = '全部';
 let filterStatus = '全部';
+const BASE_URL = document.querySelector('meta[name="baseurl"]')?.content || '';
 
 // ---- LOAD ----
 async function loadEssays() {
-  const baseUrl = document.querySelector('meta[name="baseurl"]')?.content || '';
   try {
-    const resp = await fetch(`${baseUrl}/assets/data/essay-questions.json`);
+    const resp = await fetch(`${BASE_URL}/assets/data/essay-questions.json`);
     essays = await resp.json();
   } catch (e) {
     document.getElementById('essay-app').innerHTML =
       '<div class="card" style="text-align:center;padding:40px;color:#C9708E">載入失敗，請確認 essay-questions.json 存在</div>';
     return;
   }
+  try {
+    const respA = await fetch(`${BASE_URL}/assets/data/essay-answers.json`);
+    answers = await respA.json();
+  } catch (e) { answers = {}; }
   practiceState = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
   render();
 }
@@ -126,6 +132,7 @@ function render() {
               </div>
               <div style="font-size:.95em;font-weight:600;line-height:1.5">${e.t}</div>
               ${date ? `<div style="font-size:.7em;color:#ADA9BE;margin-top:4px">上次練習：${date}</div>` : ''}
+              ${renderAnswer(e)}
             </div>
             <div style="flex-shrink:0;display:flex;flex-direction:column;gap:4px;align-items:center">
               <span style="font-size:1.2em">${statusIcon}</span>
@@ -149,6 +156,33 @@ function render() {
   `;
 
   app.innerHTML = html;
+}
+
+// ---- ANSWER ----
+function renderAnswer(e) {
+  const key = getKey(e);
+  const a = answers[key];
+  if (!a) return '';
+  const open = openAnswers.has(key);
+  let html = `<div style="margin-top:8px">
+    <button class="btn btn-outline" onclick="toggleAns('${key}')" style="font-size:.75em;padding:4px 14px">${open ? '▲ 收合擬答' : '📖 看擬答'}</button>`;
+  if (open) {
+    html += `<div class="essay-ans">`;
+    if (a.flag === 'partial') {
+      html += `<div class="essay-ans-warn">⚠ 筆記覆蓋不足（${a.gap || '部分細節'}），此擬答未含該部分具體數值，背誦前建議先查原文。</div>`;
+    }
+    html += a.ans;
+    if (a.note) {
+      html += `<div style="margin-top:10px"><a href="${BASE_URL}/notes/${a.note}/" class="btn btn-outline" style="font-size:.75em;padding:4px 14px">📚 對應筆記</a></div>`;
+    }
+    html += `</div>`;
+  }
+  html += `</div>`;
+  return html;
+}
+function toggleAns(key) {
+  if (openAnswers.has(key)) openAnswers.delete(key); else openAnswers.add(key);
+  render();
 }
 
 // ---- ACTIONS ----

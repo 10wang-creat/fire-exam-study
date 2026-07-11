@@ -159,6 +159,19 @@ a:hover{color:var(--wisteria)}
 .tpl-index a:hover{border-color:var(--lavender);color:var(--wisteria)}
 .tpl-section{font-size:1.05em;font-weight:800;margin:28px 0 10px;padding-left:10px;border-left:4px solid var(--lavender)}
 
+/* ============ ESSAY ANSWERS ============ */
+.essay-ans{background:var(--surface-soft);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-top:10px;font-size:.88em;line-height:1.8;font-weight:400}
+.essay-ans h4{color:var(--wisteria);font-size:1em;margin:10px 0 4px}
+.essay-ans h4:first-child{margin-top:0}
+.essay-ans p{margin:4px 0}
+.essay-ans ol,.essay-ans ul{padding-left:20px;margin:4px 0}
+.essay-ans li{margin:2px 0}
+.essay-ans table{width:100%;border-collapse:collapse;margin:8px 0;font-size:.92em;background:var(--surface)}
+.essay-ans th{background:rgba(187,173,216,.15);color:var(--text);padding:5px 8px;text-align:left;border:1px solid var(--border-strong)}
+.essay-ans td{padding:4px 8px;border:1px solid var(--border)}
+.essay-ans b{color:var(--text)}
+.essay-ans-warn{background:rgba(225,162,186,.15);border-left:4px solid var(--rose-soft);padding:8px 12px;border-radius:0 8px 8px 0;margin-bottom:10px;font-size:.9em;color:var(--rose)}
+
 /* ============ RESPONSIVE ============ */
 @media(max-width:600px){
   .site-header .wrapper{flex-direction:column}
